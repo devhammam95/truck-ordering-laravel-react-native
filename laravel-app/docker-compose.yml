@@ -1,0 +1,62 @@
+version: "3"
+services:
+    app:
+        build:
+            args:
+                user: mohamed
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        working_dir: /var/www/
+        environment:
+            - COMPOSER_MEMORY_LIMIT=-1
+        depends_on:
+            - mysql
+        volumes:
+            - ./:/var/www
+        networks:
+            - app
+
+    mysql:
+        image: mysql:5.7.37
+        container_name: truck_ordering_mysql
+        tty: true
+        command:
+            - '--character-set-server=utf8mb4'
+            - --lower_case_table_names=2
+        platform: linux/amd64
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./docker-compose-conf/mysql/my.conf:/etc/mysql/my.cnf
+            - ./docker-compose-conf/mysql/init/databases.sql:/docker-entrypoint-initdb.d/init.sql
+        ports:
+            - 3307:3306
+        networks:
+            - app
+
+    nginx:
+        image: nginx:stable-alpine
+        ports:
+            - 8005:80
+        depends_on:
+            - mysql
+            - app
+        volumes:
+            - ./:/var/www
+            - ./docker-compose-conf/nginx:/etc/nginx/conf.d/
+        networks:
+            - app
+networks:
+    app:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
