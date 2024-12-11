@@ -3,38 +3,54 @@
 namespace Orders\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Orders\Contracts\Services\CreateOrderServiceInterface;
 use Orders\Contracts\Services\GetAllOrdersServiceInterface;
+use Orders\Contracts\Services\GetUserOrdersServiceInterface;
 use Orders\DTOs\CreateOrderDTO;
 use Orders\Requests\CreateOrderRequest;
-
+use Orders\Services\GetUserOrdersService;
 
 class OrderController extends Controller
 {
     private GetAllOrdersServiceInterface $getAllOrdersService;
+    private GetUserOrdersService $getUserOrdersService;
+
     private CreateOrderServiceInterface $createOrderService;
+
     public function __construct(
         GetAllOrdersServiceInterface $getAllOrders,
-        CreateOrderServiceInterface $createOrder,
+        GetUserOrdersServiceInterface $getUserOrders,
+        CreateOrderServiceInterface $createOrder
     ) {
         $this->getAllOrdersService = $getAllOrders;
+        $this->getUserOrdersService = $getUserOrders;
         $this->createOrderService = $createOrder;
     }
 
-    // public function index()
-    // {
-    //     return response()->json([
-    //         'orders' => $this->getAllOrdersService->handle()
-    //     ], 200);
-    // }
+    public function index()
+    {
+        return response()->json([
+            'orders' => $this->getUserOrdersService->handle()
+        ], 200);
+    }
+
+    public function getAllOrders()
+    {
+        return view('admin.orders.index', ['orders' => $this->getAllOrdersService->handle()]);
+    }
 
     public function store(CreateOrderRequest $request)
     {
         try {
             $this->createOrderService->handle(
-                new CreateOrderDTO(Auth::user()->id, [$request->location,$request->size,$request->weight])
+                new CreateOrderDTO(
+                    Auth::user()->id,
+                    $request->location,
+                    $request->size,
+                    $request->weight
+                )
             );
         } catch (\Exception $exception) {
             Log::info("Exception: {$exception->getMessage()}");
@@ -72,22 +88,4 @@ class OrderController extends Controller
     //     ], 200);
     // }
 
-    // public function destroy(int $purchaseId)
-    // {
-    //     try {
-    //         $this->deletePurchaseService->handle(
-    //             new DeletePurchaseDTO(
-    //                 $purchaseId
-    //             )
-    //         );
-    //     } catch (\Exception $exception) {
-    //         Log::info("Exception: {$exception->getMessage()}");
-    //         return response()->json([
-    //             'error' => 'issue in deleting purchase, try again.'
-    //         ], 500);
-    //     }
-    //     return response()->json([
-    //         'message' => 'Purchase deleted successfully.'
-    //     ], 200);
-    // }
 }

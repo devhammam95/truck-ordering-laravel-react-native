@@ -2,7 +2,9 @@
 
 namespace Orders\Listeners;
 
-class UpdateProductsQuantityListener
+use Admins\Models\Admin;
+
+class NewOrderCreatedListener
 {
 
     /**
@@ -23,7 +25,7 @@ class UpdateProductsQuantityListener
      */
     public function handle($event)
     {
-
+        Admin::first()->notify();
     }
 
 }

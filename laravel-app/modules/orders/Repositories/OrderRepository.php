@@ -15,11 +15,21 @@ class OrderRepository implements OrderInterface
         $this->model = $order;
     }
 
-
-    public function paginate()
+    public function paginateUserOrders(int $userId)
     {
-        return $this->model->with('user:id,name')
+        return $this->model->where('user_id', $userId)
+        ->with('user:id,name')
+        ->orderBy('id', 'DESC')
             ->paginate();
+    }
+
+
+    public function paginateAllOrders()
+    {
+        return $this->model
+        ->with('user:id,name')
+        ->orderBy('id', 'DESC')
+        ->paginate();
     }
 
     public function find(int $orderId)
@@ -29,12 +39,9 @@ class OrderRepository implements OrderInterface
     }
 
 
-    public function create(int $userId, $orderDTO)
+    public function create(array $orderData)
     {
-        return $this->model->create(
-            [
-            ]
-        );
+        return $this->model->create($orderData);
     }
 
     public function updateOrderStatus(int $orderId, string $orderStatus)

@@ -27,6 +27,8 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'location' => 'required|string',
+            'weight' => 'required|integer|max:200',
+            'size' => 'required|integer',
         ];
     }
 
@@ -37,12 +39,5 @@ class CreateOrderRequest extends FormRequest
                 'errors' => $validator->getMessageBag(),
             ], 422)
         );
-    }
-
-    public function messages()
-    {
-        return [
-            'location' => 'Location is required',
-        ];
     }
 }

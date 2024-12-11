@@ -2,10 +2,10 @@
 
 namespace Orders\Services;
 
-use App\Models\ShippingOrder;
 use Orders\Contracts\Repositories\OrderInterface;
 use Orders\Contracts\Services\GetOrderServiceInterface;
 use Orders\DTOs\GetOrderDTO;
+use Orders\Models\ShippingOrder;
 
 class GetOrderService implements GetOrderServiceInterface
 {

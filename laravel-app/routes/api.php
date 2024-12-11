@@ -12,7 +12,7 @@ Route::group(['prefix' => 'v1'], function() {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'v1'], function() {
-       // Route::get('shipping-orders', [\Orders\Controllers\OrderController, 'getUserShippingOrders']);
+        Route::get('shipping-orders', [\Orders\Controllers\OrderController::class, 'index']);
         Route::post('shipping-orders', [\Orders\Controllers\OrderController::class, 'store']);
     });
 });

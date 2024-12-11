@@ -5,7 +5,7 @@ namespace Orders\Services;
 use Orders\Contracts\Repositories\OrderInterface;
 use Orders\Contracts\Services\CreateOrderServiceInterface;
 use Orders\DTOs\CreateOrderDTO;
-use Orders\Events\NewOrderCreated;
+use Orders\Events\NewOrderCreatedEvent;
 
 class CreateOrderService implements CreateOrderServiceInterface
 {
@@ -19,6 +19,15 @@ class CreateOrderService implements CreateOrderServiceInterface
 
     public function handle(CreateOrderDTO $createOrderDTO): void
     {
-        event(new NewOrderCreated([]));
+        $this->order->create([
+            'user_id' => $createOrderDTO->userId,
+            'location' => $createOrderDTO->location,
+            'size' => $createOrderDTO->size,
+            'weight' => $createOrderDTO->weight,
+
+        ]);
+        event(new NewOrderCreatedEvent([
+            'user_id' => $createOrderDTO->userId,
+        ]));
     }
 }

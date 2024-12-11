@@ -6,7 +6,9 @@ class CreateOrderDTO
 {
     public function __construct(
        public int $userId,
-        public array $order
+        public string $location,
+        public int $size,
+        public int $weight
     ) {
     }
 }

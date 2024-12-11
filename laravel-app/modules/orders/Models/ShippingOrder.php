@@ -3,6 +3,7 @@
 namespace Orders\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Users\Models\User;
 
 class ShippingOrder extends Model
 {

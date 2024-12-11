@@ -2,15 +2,10 @@
 
 namespace Admins\Controllers;
 
-use Admins\Contracts\AdminLoginInterface;
-use Admins\Contracts\AdminLogoutInterface;
-use Admins\DTOs\AdminLoginDTO;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Exception;
-use Illuminate\Support\Facades\Log;
 
-class AdminAuthController extends Controller
+use App\Http\Controllers\Controller;
+
+class AdminDashboardController extends Controller
 {
     public function getAdminDashboardPage()
     {

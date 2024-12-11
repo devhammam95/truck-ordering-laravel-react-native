@@ -5,9 +5,9 @@ namespace Orders\Services;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Orders\Contracts\Repositories\OrderInterface;
-use Orders\Contracts\Services\GetAllOrdersServiceInterface;
+use Orders\Contracts\Services\GetUserOrdersServiceInterface;
 
-class GetAllOrdersService implements GetAllOrdersServiceInterface
+class GetUserOrdersService implements GetUserOrdersServiceInterface
 {
     private OrderInterface $order;
 
@@ -19,6 +19,6 @@ class GetAllOrdersService implements GetAllOrdersServiceInterface
 
     public function handle(): LengthAwarePaginator
     {
-        return $this->order->paginateAllOrders();
+        return $this->order->paginateUserOrders(Auth::user()->id);
     }
 }

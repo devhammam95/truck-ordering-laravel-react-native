@@ -36,14 +36,14 @@ class AdminAuthController extends Controller
             );
 
             if (!$token) {
-                return response()->json(['error' => "admin credential isn't correct, try again!"], 200);
+                return back()->with('alert-error', "admin credential isn't correct, try again!");
             }
         }catch (Exception $exception) {
             Log::error("Exception: {$exception->getMessage()}");
             return response()->json(['error' => $exception->getMessage()], 500);
         }
 
-        return response()->json(['token' => $token], 200);
+        return redirect()->route('admin.getAdminDashboardPage');
     }
 
     public function logout()
@@ -52,8 +52,8 @@ class AdminAuthController extends Controller
             $this->adminLogoutService->handle();
         } catch (Exception $exception) {
             Log::error("Exception: {$exception->getMessage()}");
-            return response()->json(['error' => 'couldNot_Logout'], 500);
+            return back()->with('alert-error', 'Couldn\'t Logout');
         }
-        return response()->json(['message' => 'logout successfully'], 200);
+        return redirect()->route('admin.login');
     }
 }
