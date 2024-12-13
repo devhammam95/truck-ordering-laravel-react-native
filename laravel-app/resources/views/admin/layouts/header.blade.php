@@ -12,11 +12,13 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('orders.all')}}">Orders</a>
           </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link" href="{{route('users.all')}}">Users</a>
-          </li> --}}
           <li class="nav-item ">
-            <a class="nav-link text-danger" href="#">Logout</a>
+            <a class="nav-link text-danger" href="#" onclick="document.getElementById('logout-form').submit()">
+              Logout
+            </a>
+            <form id="logout-form" action="{{ route('admin.logout') }}" method="post" class="hidden">
+              {{ csrf_field() }}
+            </form>
           </li>
         </ul>
       </div>

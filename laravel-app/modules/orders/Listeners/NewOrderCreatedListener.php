@@ -3,6 +3,7 @@
 namespace Orders\Listeners;
 
 use Admins\Models\Admin;
+use Orders\Notifications\NewShippingOrderCreatedNotification;
 
 class NewOrderCreatedListener
 {
@@ -25,7 +26,9 @@ class NewOrderCreatedListener
      */
     public function handle($event)
     {
-        Admin::first()->notify();
+        Admin::first()->notify(
+            new NewShippingOrderCreatedNotification($event->orderData['user_id'])
+        );
     }
 
 }

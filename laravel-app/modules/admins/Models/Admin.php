@@ -2,6 +2,7 @@
 
 namespace Admins\Models;
 
+use Database\Factories\AdminFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,4 +22,9 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    protected static function newFactory()
+    {
+        return AdminFactory::new();
+    }
 }

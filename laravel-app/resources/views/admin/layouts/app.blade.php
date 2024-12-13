@@ -9,7 +9,7 @@
 </head>
 <body>
 @include('admin.layouts.header')
-<div class="container-fluid">
+<div class="container">
   @yield('content')
 </div>
 

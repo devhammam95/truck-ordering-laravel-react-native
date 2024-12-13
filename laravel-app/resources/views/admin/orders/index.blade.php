@@ -26,17 +26,25 @@
         <td>
             
             @if($item->status == 'pending')
-            <button class="btn btn-info">
+            <button class="btn btn-info" onclick='document.getElementById("update-order-status-form-{{$item->id}}").submit()'>
                 Change to in progress
             </button>
             @elseif($item->status == 'inprogress')
-            <button class="btn btn-success">
+            <button class="btn btn-success" onclick='document.getElementById("update-order-status-form-{{$item->id}}").submit()'>
                 Change to delivered
             </button>
             @endif
+
+            <form id="update-order-status-form-{{$item->id}}" class="hidden" action="{{route('orders.updateOrderStatus', ['id' => $item->id])}}" method="post">
+                {{ csrf_field() }}
+            </form>
             
-            <button class="btn btn-warning">Send SMS</button>
-            <button class="btn btn-primary">Send Email</button>
+            <a class="btn btn-warning" href="{{ route('orders.getSendNotificationToUserPage', ['id' => $item->id, 'notification_type' => 'sms']) }}">Send SMS</a>
+            <a class="btn btn-warning" href="{{ route('orders.getSendNotificationToUserPage', ['id' => $item->id, 'notification_type' => 'mail']) }}">Send Email</a>
+
+            {{-- <form id="send-sms-form" class="hidden" action="{{route('orders.sendNotificationToUser', ['id' => $item->id])}}" method="post">
+              {{ csrf_field() }}
+          </form> --}}
         </td>
       </tr>
       @endforeach

@@ -9,7 +9,6 @@
 
 </head>
 <body>
-
     <div class="container mt-3">
         <h2 class="text-center">Login form</h2>
         <form action="{{route('admin.login')}}" method="post">
