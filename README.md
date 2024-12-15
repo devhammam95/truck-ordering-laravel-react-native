@@ -6,6 +6,12 @@
 - Run `make start` to run all services inside docker-compose
 - Run `make run-tests` to run tests for the app
 
+## Installation for react-native app:
+- Run `npm i`
+- Run `npx react-native run-android`
+- Note: Gradle caches can sometimes cause issues with Kotlin compilation, to fix it clean the build and restart the build process: 
+- Run `npx react-native clean`, `cd android && ./gradlew clean` then `npx react-native run-android`
+
 # Usage
 - Run `make setup` and app will start setup
 - Your host api will be `http://localhost:8005`
