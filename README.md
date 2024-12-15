@@ -20,7 +20,7 @@
 
 ## Used Technologies
 - docker
-- PHP8.0
+- PHP8.3
 - Laravel
 - mysql
 - nginx
