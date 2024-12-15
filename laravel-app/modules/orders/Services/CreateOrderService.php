@@ -2,6 +2,8 @@
 
 namespace Orders\Services;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Orders\Contracts\Repositories\OrderInterface;
 use Orders\Contracts\Services\CreateOrderServiceInterface;
 use Orders\DTOs\CreateOrderDTO;
@@ -24,8 +26,12 @@ class CreateOrderService implements CreateOrderServiceInterface
             'location' => $createOrderDTO->location,
             'size' => $createOrderDTO->size,
             'weight' => $createOrderDTO->weight,
-
+            'deliver_pickup_type' => $createOrderDTO->deliverPickupType,
+            'delivery_pickup_date_time' => 
+            Carbon::createFromFormat('Y-m-d\TH:i:s.u\Z', $createOrderDTO->deliverPickupDateTime)
+            ->format('Y-m-d H:i:s'),
         ]);
+
         event(new NewOrderCreatedEvent([
             'user_id' => $createOrderDTO->userId,
         ]));

@@ -6,6 +6,8 @@
         <th scope="col">#</th>
         <th scope="col">user Sender</th>
         <th scope="col">Order Status</th>
+        <th scope="col">Delivery / Pickup type</th>
+        <th scope="col">Delivery / Pickup DateTime</th>
         <th scope="col">size</th>
         <th scope="col">weight</th>
         <th scope="col">location</th>
@@ -19,12 +21,13 @@
         <td>{{$item->id}}</td>
         <td>{{$item->user->name}}</td>
         <td>{{$item->status ?? 'pending'}}</td>
+        <td>{{$item->delivery_pickup_type}}</td>
+        <td>{{$item->delivery_pickup_date_time}}</td>
         <td>{{$item->size}}</td>
         <td>{{$item->weight}}</td>
         <td>{{$item->location}}</td>
         <td>{{$item->created_at->format('Y-m-d h:i:s')}}</td>
         <td>
-            
             @if($item->status == 'pending')
             <button class="btn btn-info" onclick='document.getElementById("update-order-status-form-{{$item->id}}").submit()'>
                 Change to in progress

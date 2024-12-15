@@ -13,10 +13,11 @@ class ShippingOrder extends Model
         'size',
         'weight',
         'status',
-        // 'delivery_date',
-        // 'delivery_time',
+        'delivery_pickup_type',
+        'delivery_pickup_date_time'
     ];
 
+   
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

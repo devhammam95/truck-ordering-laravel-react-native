@@ -27,8 +27,10 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'location' => 'required|string',
-            'weight' => 'required|integer|max:200',
+            'weight' => 'required|integer|max:400',
             'size' => 'required|integer',
+            'delivery_pickup_type' => 'required|in:delivery,pickup',
+            'delivery_pickup_date_time' => 'required|date',
         ];
     }
 

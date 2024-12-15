@@ -69,17 +69,19 @@ class OrderController extends Controller
                     Auth::user()->id,
                     $request->location,
                     $request->size,
-                    $request->weight
+                    $request->weight,
+                    $request->delivery_pickup_type,
+                    $request->delivery_pickup_date_time
                 )
             );
         } catch (\Exception $exception) {
             Log::info("Exception: {$exception->getMessage()}");
             return response()->json([
-                'error' => 'issue in creating a new purchase, try again.'
+                'error' => 'issue in creating a new shipping order, try again.'
             ], 500);
         }
         return response()->json([
-            'message' => 'New Purchase added successfully',
+            'message' => 'New Order added successfully',
         ], 200);
 
     }

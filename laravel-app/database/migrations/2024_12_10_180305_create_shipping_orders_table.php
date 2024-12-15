@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('weight');
             $table->integer('size');
             $table->enum('status', ['pending', 'inprogress', 'delivered'])->default('pending');
-            // $table->timestamp('delivery_date');
-            // $table->dateTime('delivery_time');
+            $table->enum('delivery_pickup_type', ['delivery', 'pickup'])->default('delivery');
+            $table->timestamp('delivery_pickup_date_time');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
