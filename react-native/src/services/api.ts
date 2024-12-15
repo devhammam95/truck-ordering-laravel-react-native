@@ -76,7 +76,15 @@ export const authAPI = {
       throw error;
     }
   },
-  logout: () => api.post(ENDPOINTS.AUTH.LOGOUT),
+  logout: async () => {
+    try {
+      const response = await api.post('/v1/user/logout');
+      await AsyncStorage.removeItem('userToken');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export const orderAPI = {

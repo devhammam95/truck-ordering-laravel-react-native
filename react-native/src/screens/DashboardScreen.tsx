@@ -1,8 +1,21 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Button, Surface } from 'react-native-paper';
+import { authAPI } from '../services/api';
 
 const DashboardScreen = ({ navigation }) => {
+  const handleLogout = async () => {
+    try {
+      await authAPI.logout();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Surface style={styles.content}>
@@ -24,6 +37,14 @@ const DashboardScreen = ({ navigation }) => {
             style={styles.button}
           >
             View Orders
+          </Button>
+          <Button
+            mode="contained"git
+            onPress={handleLogout}
+            style={[styles.button, styles.logoutButton]}
+            buttonColor="#ff4444"
+          >
+            Logout
           </Button>
         </View>
       </Surface>
@@ -63,6 +84,9 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
+  },
+  logoutButton: {
+    marginTop: 16,
   },
 });
 
