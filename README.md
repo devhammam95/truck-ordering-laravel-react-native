@@ -1,5 +1,5 @@
 ## About Task
-- Create simple truck shippig ordering in laravel & react-native
+- Create simple truck shipping ordering in laravel & react-native
 
 ## Installation by docker for laravel:
 - Run `make setup` and app will start setup
