@@ -1,3 +1,15 @@
+<h1 align="center">
+Laravel with React Native 
+</h1>
+<div align="center">
+  <img src="./react-native/assets/login.png" alt="login for app" height="425">
+  <img src="./react-native/assets/register.png" alt="Register for app" height="425">
+    <img src="./react-native/assets/dashboard.png" alt="Home " height="425">
+    <img src="./react-native/assets/view-shipping-order.png" alt="View shipping orders.png" height="425">
+    <img src="./react-native/assets/dashboard.png" alt="request-shipping-order.png" height="425">
+</div>
+<hr>
+
 ## About Task
 - Create simple truck shipping ordering in laravel & react-native
 
