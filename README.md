@@ -4,6 +4,7 @@
 ## Installation by docker for laravel:
 - Run `make setup` and app will start setup
 - Run `make start` to run all services inside docker-compose
+- Run `make run-tests` to run tests for the app
 
 # Usage
 - Run `make setup` and app will start setup
