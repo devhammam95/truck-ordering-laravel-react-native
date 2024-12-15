@@ -6,7 +6,7 @@ Laravel with React Native
   <img src="./react-native/assets/register.png" alt="Register for app" height="425">
     <img src="./react-native/assets/dashboard.png" alt="Home " height="425">
     <img src="./react-native/assets/view-shipping-order.png" alt="View shipping orders.png" height="425">
-    <img src="./react-native/assets/dashboard.png" alt="request-shipping-order.png" height="425">
+    <img src="./react-native/assets/request-shipping-order.png" alt="request-shipping-order.png" height="425">
 </div>
 <hr>
 
